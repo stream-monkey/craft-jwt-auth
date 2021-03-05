@@ -36,6 +36,10 @@ class JWT extends Component
      */
     public function getJWTFromRequest()
     {
+        if (Craft::$app->request->isConsoleRequest) {
+            return null;
+        }
+        
         // Look for an access token in the settings
         $accessToken = Craft::$app->request->headers->get('authorization') ?: Craft::$app->request->headers->get('x-access-token');
 
